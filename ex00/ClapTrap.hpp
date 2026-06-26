@@ -1,26 +1,25 @@
 #ifndef CLAPTRAP_HPP
-#define CALPTRAP_HPP
-#include<string>
-#include<iostream>
+# define CLAPTRAP_HPP
+# include <iostream>
+# include <string>
 
 class ClapTrap
 {
-    private:
-        std::string _name;
-        int _hitPoints;
-        int _energyPoints;
-        int __attackDamage;
-    public:
+  private:
+	std::string _name;
+	unsigned int _hitPoints;
+	unsigned int _energyPoints;
+	unsigned int _attackDamage;
 
-        ClapTrap();
-        ClapTrap(const std::string & name);
-        ClapTrap(const ClapTrap& other);
-        ClapTrap& operator=(const ClapTrap& other);
-        ~ClapTrap();
-        void attack(const std::string& target);
-        void takeDamage(unsigned int amount);
-        void beRepaired(unsigned int amount);
-
+  public:
+	ClapTrap();
+	ClapTrap(const std::string &name);
+	ClapTrap(const ClapTrap &other);
+	ClapTrap &operator=(const ClapTrap &other);
+	~ClapTrap();
+	void attack(const std::string &target);
+	void takeDamage(unsigned int amount);
+	void beRepaired(unsigned int amount);
 };
 
 #endif

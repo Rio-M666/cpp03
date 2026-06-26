@@ -2,6 +2,7 @@ NAME = claptrap
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+RM = rm -f
 
 SRCS = main.cpp ClapTrap.cpp
 OBJS = $(SRCS:.cpp=.o)
@@ -11,11 +12,14 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
+%.o: %.cpp ClapTrap.hpp Makefile
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
