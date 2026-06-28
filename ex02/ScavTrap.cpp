@@ -18,7 +18,8 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
     this->_attackDamage=20;
     this->_is_guardGate=false;
 }
-ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
+ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other),
+	_is_guardGate(other._is_guardGate)
 {
     std::cout<<"ScavTrap Copy constructor called"<<std::endl;
 }
@@ -54,16 +55,8 @@ void ScavTrap::attack(const std::string &target)
 
 void ScavTrap::guardGate()
 {
-    if(this->_is_guardGate==false)
-    {
-        std::cout<<"ScavTrap is not guardGate mode now"<<std::endl;
-        this->_is_guardGate=true;
-    }
-    else
-    {
-        std::cout<<"ScavTrap is guardGate mode now"<<std::endl;
-        this->_is_guardGate=false;
-    }
+	this->_is_guardGate = true;
+	std::cout << "ScavTrap " << this->_name
+			  << " is now in Gate keeper mode" << std::endl;
 }
-
 

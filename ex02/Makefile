@@ -11,6 +11,9 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
+%.o: %.cpp ClapTrap.hpp ScavTrap.hpp FragTrap.hpp Makefile
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 clean:
 	rm -f $(OBJS)
 
