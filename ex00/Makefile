@@ -1,26 +1,32 @@
 NAME = claptrap
-
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-RM = rm -f
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
-SRCS = main.cpp ClapTrap.cpp
-OBJS = $(SRCS:.cpp=.o)
+SRC = main.cpp ClapTrap.cpp
+OBJDIR = obj
+DEPDIR = dep
+OBJ = $(addprefix $(OBJDIR)/,$(SRC:.cpp=.o))
+DEP = $(addprefix $(DEPDIR)/,$(SRC:.cpp=.d))
 
-all: $(NAME)
+all : $(NAME)
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
-%.o: %.cpp ClapTrap.hpp Makefile
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+$(OBJDIR) $(DEPDIR):
+	mkdir -p $@
 
-clean:
-	$(RM) $(OBJS)
+$(OBJDIR)/%.o: %.cpp | $(OBJDIR) $(DEPDIR)
+	$(CXX) $(CXXFLAGS) -MMD -MP -MF $(DEPDIR)/$*.d -c $< -o $@
+
+clean :
+	rm -rf $(OBJDIR) $(DEPDIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
+
+-include $(DEP)
 
 .PHONY: all clean fclean re
