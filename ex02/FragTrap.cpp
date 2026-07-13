@@ -32,7 +32,7 @@ FragTrap &FragTrap::operator=(const FragTrap &other)
 }
 FragTrap::~FragTrap()
 {
-    std::cout<<"FragTrap Deconstructor called"<<std::endl;
+    std::cout<<"FragTrap Destructor called"<<std::endl;
 }
 
 void FragTrap::attack(const std::string &target)
@@ -52,8 +52,11 @@ void FragTrap::attack(const std::string &target)
 
 void FragTrap::highFivesGuys(void)
 {
-    if(this->_hitPoints>0)
-        std::cout<<"High Five!"<<std::endl;
-    else
-        std::cout<<"They are already dead"<<std::endl;
+	if (_hitPoints == 0)
+	{
+    	std::cout << "FragTrap cannot request a high five because it has no hit points."
+              << std::endl;
+    	return;
+	}
+	std::cout << "FragTrap requests a high five!" << std::endl;
 }
